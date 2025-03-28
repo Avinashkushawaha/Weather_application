@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            text-align: center;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #3498db;
+        }
+        .weather-info {
+            font-size: 1.5rem;
+        }
+        .temperature {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .input-group {
+            margin: 20px 0;
+        }
+        .input-group input {
+            padding: 10px;
+            font-size: 1rem;
+            width: 200px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .input-group button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .input-group button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Weather App</h1>
+
+        <!-- Weather Search Form -->
+        <div class="input-group">
+            <form method="get" action="">
+                <input type="text" name="city" value="{{ city }}" placeholder="Enter city name" required>
+                <button type="submit">Get Weather</button>
+            </form>
+        </div>
+
+        {% if weather_data %}
+        <div class="weather-info">
+            <h2>Weather in {{ city }}</h2>
+            <div class="temperature">
+                {{ weather_data.main.temp }}°C
+            </div>
+            <p><strong>Condition:</strong> {{ weather_data.weather.0.description }}</p>
+            <p><strong>Humidity:</strong> {{ weather_data.main.humidity }}%</p>
+            <p><strong>Wind Speed:</strong> {{ weather_data.wind.speed }} m/s</p>
+        </div>
+        {% else %}
+        <p>Weather data not found. Please check the city name.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
